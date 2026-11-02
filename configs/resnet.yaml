@@ -1,0 +1,27 @@
+# Phase 2: 1D ResNet on synthetic data over the RadioML-overlap classes.
+# Switch data.source to radioml once data/RML2016.10a_dict.pkl is downloaded.
+name: resnet
+seed: 0
+model:
+  name: resnet
+  params: {widths: [32, 64, 128], blocks_per_stage: 2, dropout: 0.3}
+data:
+  source: synth
+  classes: phase1
+  n_samples: 128
+  snrs: [-10, -6, -2, 2, 6, 10, 14, 18]
+  per_class_per_snr: 400
+  radioml_path: data/RML2016.10a_dict.pkl
+  split: {val: 0.15, test: 0.15}
+augment:
+  use: []
+train:
+  epochs: 15
+  batch_size: 256
+  lr: 0.003
+  weight_decay: 0.0001
+  device: auto
+eval: {snr_low: -6, snr_high: 10, ece_bins: 15}
+explain:
+  threshold: 0.6       # below this top-1 probability the explanation says "uncertain"
+tracking: none          # none | mlflow

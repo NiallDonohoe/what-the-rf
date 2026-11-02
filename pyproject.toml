@@ -1,0 +1,58 @@
+[project]
+name = "wtrf"
+version = "0.1.0"
+description = "Modulation classifier for raw IQ samples, with a sim-to-real evaluation."
+readme = "README.md"
+license = "MIT"
+license-files = ["LICENSE"]
+authors = [{ name = "Niall Donohoe" }]
+requires-python = ">=3.11"
+dependencies = [
+    "numpy>=1.26",
+    "scipy>=1.11",
+    "torch>=2.3",
+    "pyyaml>=6.0",
+    "pydantic>=2.6",
+    "matplotlib>=3.8",
+]
+
+[project.optional-dependencies]
+app = ["streamlit>=1.35"]
+mlflow = ["mlflow>=2.12"]
+dev = ["pytest>=8.0", "ruff>=0.6", "mypy>=1.10", "types-PyYAML"]
+
+[project.scripts]
+wtrf = "wtrf.cli:main"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/wtrf"]
+
+# CPU-only torch wheels on Linux (CI); macOS wheels come from PyPI.
+[tool.uv.sources]
+torch = [{ index = "pytorch-cpu", marker = "sys_platform == 'linux'" }]
+
+[[tool.uv.index]]
+name = "pytorch-cpu"
+url = "https://download.pytorch.org/whl/cpu"
+explicit = true
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "B", "UP", "SIM", "NPY"]
+
+[tool.mypy]
+python_version = "3.11"
+ignore_missing_imports = true
+warn_unused_ignores = true
+files = ["src/wtrf"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"
