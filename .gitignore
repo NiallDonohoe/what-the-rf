@@ -1,0 +1,20 @@
+__pycache__/
+*.py[cod]
+.venv/
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+*.egg-info/
+dist/
+
+# Datasets are downloaded, never committed (RadioML licence).
+/data/
+
+# Training runs and generated reports.
+/runs/
+/mlruns/
+reports/*
+!reports/.gitkeep
+
+# Large SigMF captures. Commit small ones explicitly with `git add -f`.
+captures/*.sigmf-data
