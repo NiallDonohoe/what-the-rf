@@ -44,7 +44,7 @@ def fading(z: np.ndarray, rng: Rng, cfg: AugmentConfig) -> np.ndarray:
     """Rayleigh multipath with an exponential power-delay profile (sample-spaced taps)."""
     k = cfg.fading_taps
     profile = np.exp(-cfg.fading_decay * np.arange(k))
-    taps = (rng.standard_normal((z.shape[0], k)) + 1j * rng.standard_normal((z.shape[0], k)))
+    taps = rng.standard_normal((z.shape[0], k)) + 1j * rng.standard_normal((z.shape[0], k))
     taps *= np.sqrt(profile / profile.sum() / 2)
     out = np.zeros_like(z)
     for d in range(k):

@@ -112,9 +112,7 @@ def capture_windows(
     return normalize(sigmf.window(iq, n_samples, cfg.hop)), fs, iq
 
 
-def load_capture_set(
-    cfg: CaptureConfig, classes: tuple[str, ...], n_samples: int
-) -> IQDataset:
+def load_capture_set(cfg: CaptureConfig, classes: tuple[str, ...], n_samples: int) -> IQDataset:
     """All labelled captures in cfg.dir whose class the model knows, as one windowed set.
 
     The real-capture set is a test set only: never train or tune on it.

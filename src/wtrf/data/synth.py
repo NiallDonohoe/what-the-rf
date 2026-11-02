@@ -74,9 +74,7 @@ def _linear(constellation: np.ndarray) -> Callable[[int, int, Rng], np.ndarray]:
     return gen
 
 
-def _fsk(
-    levels: int, sps: int, h: float, bt: float
-) -> Callable[[int, int, Rng], np.ndarray]:
+def _fsk(levels: int, sps: int, h: float, bt: float) -> Callable[[int, int, Rng], np.ndarray]:
     """Continuous-phase (G)FSK. Tone spacing is h / sps cycles/sample."""
 
     def gen(n: int, length: int, rng: Rng) -> np.ndarray:
@@ -179,8 +177,6 @@ def from_iq(x: np.ndarray) -> np.ndarray:
     return x[..., 0, :] + 1j * x[..., 1, :]
 
 
-def generate(
-    cls: str, n: int, snr_db: float, rng: Rng, n_samples: int = 128
-) -> np.ndarray:
+def generate(cls: str, n: int, snr_db: float, rng: Rng, n_samples: int = 128) -> np.ndarray:
     """`n` noisy examples of `cls` as float32 (n, 2, n_samples)."""
     return to_iq(add_noise(clean(cls, n, rng, n_samples), snr_db, rng))
