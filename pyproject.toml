@@ -17,7 +17,6 @@ dependencies = [
 ]
 
 [project.optional-dependencies]
-app = ["streamlit>=1.35"]
 mlflow = ["mlflow>=2.12"]
 dev = ["pytest>=8.0", "ruff>=0.6", "mypy>=1.10", "types-PyYAML"]
 

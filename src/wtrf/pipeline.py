@@ -1,4 +1,4 @@
-"""Classify and explain a capture. The CLI and the demo app both call these functions."""
+"""Classify and explain a capture. The CLI commands call these functions."""
 
 from __future__ import annotations
 
@@ -32,8 +32,6 @@ class Classification:
     probs: np.ndarray  # calibrated, averaged over windows
     features: Features
     meta: CaptureMeta
-    iq: np.ndarray  # preprocessed stream at the model rate
-    fs: float
     reliability: Reliability | None
 
     def top(self, k: int = 3) -> list[tuple[str, float]]:
@@ -65,7 +63,7 @@ def classify_capture(run: Run, capture: str | Path | sigmf.Capture) -> Classific
         n_windows=len(windows),
     )
     return Classification(
-        run.id, run.classes, probs, feats, meta, iq, fs, load_reliability(run, feats.snr_db_est)
+        run.id, run.classes, probs, feats, meta, load_reliability(run, feats.snr_db_est)
     )
 
 
