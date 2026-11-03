@@ -15,7 +15,7 @@ training data (synthetic, RadioML) ─▶ data layer (loaders, augment) ─▶ m
                                               ▲                          │
                                        windowed captures           probabilities
                                               │                          ▼
-real capture (SigMF) ─────────────▶ features (bandwidth, SNR) ─▶ explanation ─▶ CLI + demo app
+real capture (SigMF) ─────────────▶ features (bandwidth, SNR) ─▶ explanation ─▶ CLI
 ```
 
 ## Quickstart
@@ -28,7 +28,6 @@ wtrf train --config configs/cnn.yaml --eval     # Phase 1 gate: SNR curve + conf
 wtrf synth --class WBFM --snr 8 --n 200 --out examples/wbfm
 wtrf classify examples/wbfm.sigmf-meta          # top-3 classes with calibrated probabilities
 wtrf explain examples/wbfm.sigmf-meta           # + explanation from measured features
-streamlit run app/main.py                       # demo app
 pytest                                          # ~5 s, no GPU, no downloads, no network
 ```
 
@@ -58,11 +57,10 @@ src/wtrf/
   eval/             snr_curves, confusion, calibration, real_vs_synth, ablation, harness
   features.py       bandwidth, centre frequency, SNR estimate, spectrogram
   explain.py        plain-English explanation from probabilities and features
-  pipeline.py       classify/explain a capture: the one path the CLI and app share
+  pipeline.py       classify/explain a capture: the one path classify and explain share
   cli.py
-app/main.py         Streamlit demo
 captures/           your real SigMF captures (test set only)
-examples/           synthetic SigMF files for trying the CLI and app
+examples/           synthetic SigMF files for trying the CLI
 scripts/            download_radioml.py
 ```
 
@@ -205,7 +203,7 @@ CI (GitHub Actions) runs ruff, mypy and pytest on every push, with CPU-only torc
 | 3. Real captures | Real test set frozen, gap measured | Tooling ready; needs your FM, APRS, FT8 and CW captures |
 | 4. Close the gap | Recovery per augmentation | `wtrf ablate` ready; needs Phase 3 captures |
 | 5. Explanation | Low-confidence inputs hedge | Done; deterministic template (LLM layer removed) |
-| 6. Demo | Upload a capture, get verdict + explanation | Done (CLI + Streamlit) |
+| 6. Demo | Classify a capture, get verdict + explanation | Done (CLI) |
 
 ## Results
 
