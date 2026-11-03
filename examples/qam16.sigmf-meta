@@ -1,0 +1,24 @@
+{
+  "global": {
+    "core:datatype": "cf32_le",
+    "core:sample_rate": 200000.0,
+    "core:version": "1.0.0",
+    "core:extensions": [
+      {
+        "name": "wtrf",
+        "version": "0.1.0",
+        "optional": true
+      }
+    ],
+    "core:hw": "synthetic",
+    "wtrf:session": "synthetic-3"
+  },
+  "captures": [
+    {
+      "core:sample_start": 0,
+      "core:frequency": 100000000.0,
+      "core:datetime": "2026-11-02T14:43:00.838601Z"
+    }
+  ],
+  "annotations": []
+}

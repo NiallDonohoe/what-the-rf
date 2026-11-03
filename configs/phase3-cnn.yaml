@@ -1,0 +1,26 @@
+# Phase 3/4: train on synthetic versions of the classes you capture, test on real SigMF captures.
+# Captures are resampled to captures.target_rate before windowing; pick a rate where every
+# class fits in the window (see README, "Real captures").
+name: phase3-cnn
+seed: 0
+model:
+  name: cnn
+  params: {channels: [64, 64, 128, 128], kernel: 7, dropout: 0.3}
+data:
+  source: synth
+  classes: phase3
+  n_samples: 128
+  snrs: [-6, -2, 2, 6, 10, 14, 18]
+  per_class_per_snr: 400
+augment:
+  use: []               # wtrf ablate overrides this per variant
+  p: 0.8
+  cfo_max: 0.02
+  noise_snr: [-4, 20]
+  fading_taps: 4
+  drift_max: 0.005
+captures:
+  dir: captures
+  target_rate: 48000
+train: {epochs: 15, batch_size: 256, lr: 0.003, weight_decay: 0.0001}
+explain: {threshold: 0.6}

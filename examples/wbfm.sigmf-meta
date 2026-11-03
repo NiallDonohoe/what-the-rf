@@ -1,0 +1,31 @@
+{
+  "global": {
+    "core:datatype": "cf32_le",
+    "core:sample_rate": 200000.0,
+    "core:version": "1.0.0",
+    "core:extensions": [
+      {
+        "name": "wtrf",
+        "version": "0.1.0",
+        "optional": true
+      }
+    ],
+    "core:hw": "synthetic",
+    "wtrf:label": "fm_broadcast",
+    "wtrf:session": "synthetic-3"
+  },
+  "captures": [
+    {
+      "core:sample_start": 0,
+      "core:frequency": 100000000.0,
+      "core:datetime": "2026-11-02T14:42:59.706173Z"
+    }
+  ],
+  "annotations": [
+    {
+      "core:sample_start": 0,
+      "core:sample_count": 25600,
+      "core:label": "fm_broadcast"
+    }
+  ]
+}
